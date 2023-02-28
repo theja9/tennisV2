@@ -1,5 +1,6 @@
 package com.spring.tennisV2.service;
 
+import com.spring.tennisV2.exception.IllegalScorerException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -10,14 +11,16 @@ public class ScoreService {
     }
 
     public String translateScore(int score) {
-        if(score == 0)
-            return "Love";
-        if(score == 1)
-            return "Fifteen";
-        if(score == 2)
-            return "Thirty";
-        if(score == 3)
-            return "Forty";
-        return null;
+        switch (score) {
+            case THREE:
+                return FORTY;
+            case TWO:
+                return THIRTY;
+            case ONE:
+                return FIFTEEN;
+            case ZERO:
+                return LOVE;
+        }
+        throw new IllegalScorerException("Illegal score:"+ score);
     }
 }
