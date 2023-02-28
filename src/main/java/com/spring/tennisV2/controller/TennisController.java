@@ -1,5 +1,7 @@
 package com.spring.tennisV2.controller;
 
+import com.spring.tennisV2.service.PlayerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -8,12 +10,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/tennis")
 public class TennisController {
-    private int playerOneScore;
+
+    @Autowired
+    private PlayerService players;
 
     @GetMapping("/updateScore")
-    public int updateScore(@RequestParam String scorer) {
+    public void updateScore(@RequestParam String scorer) {
         if (scorer.equalsIgnoreCase("playerOne"))
-             ++playerOneScore;
-        return playerOneScore;
+            players.playerOneScores();
     }
 }
