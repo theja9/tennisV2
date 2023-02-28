@@ -14,6 +14,8 @@ public class ScoreService {
             return "Love";
         if(score == 1)
             return "Fifteen";
+        if(score == 2)
+            return "Thirty";
         return null;
     }
 }
