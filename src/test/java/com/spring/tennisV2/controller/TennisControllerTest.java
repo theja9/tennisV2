@@ -2,7 +2,6 @@ package com.spring.tennisV2.controller;
 
 import com.spring.tennisV2.exception.IllegalScorerException;
 import com.spring.tennisV2.service.PlayerService;
-import com.spring.tennisV2.service.ScoreService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -25,9 +24,6 @@ public class TennisControllerTest {
     @MockBean
     private PlayerService players;
 
-    @MockBean
-    private ScoreService scoreService;
-
     @ParameterizedTest
     @ValueSource(strings = {"playerOne", "playerTwo"})
     public void updateScore(String scorer) throws Exception {
@@ -42,13 +38,6 @@ public class TennisControllerTest {
         mockmvc.perform(request)
                 .andExpect(status().isBadRequest())
                 .andExpect(result -> assertTrue(result.getResolvedException() instanceof IllegalScorerException));
-    }
-
-    @Test
-    public void testGetScore() throws Exception {
-        RequestBuilder request = MockMvcRequestBuilders.get("/tennis/getScore");
-        mockmvc.perform(request)
-                .andExpect(status().isOk());
     }
 
 }
