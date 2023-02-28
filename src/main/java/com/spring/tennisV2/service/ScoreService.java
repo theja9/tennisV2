@@ -12,8 +12,6 @@ public class ScoreService {
     public String translateScore(int score) {
         if(score == 0)
             return "Love";
-        if(score == 1)
-            return "Fifteen";
         return null;
     }
 }

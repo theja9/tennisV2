@@ -17,7 +17,6 @@ public class ScoreServiceTest {
     @ParameterizedTest
     @CsvSource({
             "0,0,Love Love",
-            "0,1,Love Fifteen"
     })
     public void testGetScore(int playerOnePoints, int playerTwoPoints, String expectedScore) {
         String translatedScore = scoreService.getScore(playerOnePoints, playerTwoPoints);
