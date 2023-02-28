@@ -1,5 +1,6 @@
 package com.spring.tennisV2.controller;
 
+import com.spring.tennisV2.exception.IllegalScorerException;
 import com.spring.tennisV2.service.PlayerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +19,10 @@ public class TennisController {
     public void updateScore(@RequestParam String scorer) {
         if (scorer.equalsIgnoreCase("playerOne"))
             players.playerOneScores();
-        if (scorer.equalsIgnoreCase("playerTwo")) {
+        else if (scorer.equalsIgnoreCase("playerTwo")) {
             players.playerTwoScores();
+        } else {
+            throw new IllegalScorerException("Scorer can be either playerOne or playerTwo");
         }
     }
 }
