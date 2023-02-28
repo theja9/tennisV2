@@ -18,5 +18,8 @@ public class TennisController {
     public void updateScore(@RequestParam String scorer) {
         if (scorer.equalsIgnoreCase("playerOne"))
             players.playerOneScores();
+        if (scorer.equalsIgnoreCase("playerTwo")) {
+            players.playerTwoScores();
+        }
     }
 }
