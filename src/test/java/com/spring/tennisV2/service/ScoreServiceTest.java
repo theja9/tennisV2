@@ -31,6 +31,8 @@ public class ScoreServiceTest {
             "1,1,Fifteen All",
             "2,2,Thirty All",
             "3,3,Deuce",
+            "3,4,PlayerTwo Advantage",
+            "4,3,PlayerOne Advantage",
     })
     public void testGetScore(int playerOnePoints, int playerTwoPoints, String expectedScore) {
         String translatedScore = scoreService.getScore(playerOnePoints, playerTwoPoints);
