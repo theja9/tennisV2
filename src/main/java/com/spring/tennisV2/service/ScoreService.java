@@ -16,8 +16,12 @@ public class ScoreService {
     private static final String FORTY = "Forty";
     private static final String ALL = "All";
     private static final String SPACE = " ";
+    private static final String DEUCE = "Deuce";
 
     public String getScore(int playerOneScore, int playerTwoScore) {
+        if(playerOneScore > TWO && playerOneScore == playerTwoScore){
+            return DEUCE;
+        }
         if(playerOneScore == playerTwoScore)
             return translateScore(playerOneScore) + SPACE + ALL;
         return String.format("%s %s", translateScore(playerOneScore), translateScore(playerTwoScore));
