@@ -1,10 +1,14 @@
 package com.spring.tennisV2.service;
 
 import com.spring.tennisV2.exception.IllegalScorerException;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ScoreService {
+
+    @Autowired
+    private PlayerService players;
 
     private static final int ZERO = 0;
     private static final int ONE = 1;
@@ -23,18 +27,25 @@ public class ScoreService {
     private static final String WINS = "Wins";
 
     public String getScore(int playerOneScore, int playerTwoScore) {
-        if (Math.max(playerOneScore, playerTwoScore) > THREE){
-            if(isPointDifferenceOne(playerOneScore, playerTwoScore))
+        if (Math.max(playerOneScore, playerTwoScore) > THREE) {
+            if (isPointDifferenceOne(playerOneScore, playerTwoScore))
                 return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + ADVANTAGE;
-            else
+            else {
+                quitGame();
                 return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + WINS;
+            }
         }
-        if(playerOneScore > TWO && playerOneScore == playerTwoScore){
+        if (playerOneScore > TWO && playerOneScore == playerTwoScore) {
             return DEUCE;
         }
-        if(playerOneScore == playerTwoScore)
+        if (playerOneScore == playerTwoScore)
             return translateScore(playerOneScore) + SPACE + ALL;
         return String.format("%s %s", translateScore(playerOneScore), translateScore(playerTwoScore));
+    }
+
+    public void quitGame() {
+        players.setPlayerOnePoints(0);
+        players.setPlayerTwoPoints(0);
     }
 
     private boolean isPointDifferenceOne(int playerOneScore, int playerTwoScore) {
@@ -56,6 +67,6 @@ public class ScoreService {
             case ZERO:
                 return LOVE;
         }
-        throw new IllegalScorerException("Illegal score:"+ score);
+        throw new IllegalScorerException("Illegal score:" + score);
     }
 }
