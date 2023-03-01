@@ -20,10 +20,15 @@ public class ScoreService {
     private static final String PLAYER_ONE = "PlayerOne";
     private static final String PLAYER_TWO = "PlayerTwo";
     private static final String ADVANTAGE = "Advantage";
+    private static final String WINS = "Wins";
 
     public String getScore(int playerOneScore, int playerTwoScore) {
-        if (Math.max(playerOneScore, playerTwoScore) > THREE && isPointDifferenceOne(playerOneScore, playerTwoScore))
-            return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + ADVANTAGE;
+        if (Math.max(playerOneScore, playerTwoScore) > THREE){
+            if(isPointDifferenceOne(playerOneScore, playerTwoScore))
+                return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + ADVANTAGE;
+            else
+                return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + WINS;
+        }
         if(playerOneScore > TWO && playerOneScore == playerTwoScore){
             return DEUCE;
         }
