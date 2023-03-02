@@ -29,9 +29,9 @@ public class ScoreService {
     public String getScore(int playerOneScore, int playerTwoScore) {
         if (isScoreEqual(playerOneScore, playerTwoScore))
             return playerOneScore > TWO ? DEUCE : translateScore(playerOneScore) + SPACE + ALL;
-        if (isScoreGreaterThanThree(playerOneScore, playerTwoScore) && isPointDifferenceOne(playerOneScore, playerTwoScore))
+        if (isAdvantage(playerOneScore, playerTwoScore))
             return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + ADVANTAGE;
-        if (isScoreGreaterThanThree(playerOneScore, playerTwoScore) && isPointDiffgteTwo(playerOneScore, playerTwoScore)) {
+        if (isWin(playerOneScore, playerTwoScore)) {
             quitGame();
             return getHighestScorer(playerOneScore, playerTwoScore) + SPACE + WINS;
         }
@@ -47,8 +47,16 @@ public class ScoreService {
         return Math.abs(playerOneScore - playerTwoScore) == ONE;
     }
 
-    private boolean isPointDiffgteTwo(int playerOneScore, int playerTwoScore) {
+    private boolean isPointDiffGteTwo(int playerOneScore, int playerTwoScore) {
         return Math.abs(playerOneScore - playerTwoScore) >= TWO;
+    }
+
+    private boolean isAdvantage(int playerOneScore, int playerTwoScore) {
+        return isScoreGreaterThanThree(playerOneScore, playerTwoScore) && isPointDifferenceOne(playerOneScore, playerTwoScore);
+    }
+
+    private boolean isWin(int playerOneScore, int playerTwoScore) {
+        return isScoreGreaterThanThree(playerOneScore, playerTwoScore) && isPointDiffGteTwo(playerOneScore, playerTwoScore);
     }
 
     private String getHighestScorer(int playerOneScore, int playerTwoScore) {
