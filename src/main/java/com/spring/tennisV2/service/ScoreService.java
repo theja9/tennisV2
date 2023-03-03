@@ -4,27 +4,13 @@ import com.spring.tennisV2.exception.IllegalScorerException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import static com.spring.tennisV2.config.ScoreConstant.*;
+
 @Service
 public class ScoreService {
 
     @Autowired
     private PlayerService players;
-
-    private static final int ZERO = 0;
-    private static final int ONE = 1;
-    private static final int TWO = 2;
-    private static final int THREE = 3;
-    private static final String LOVE = "Love";
-    private static final String FIFTEEN = "Fifteen";
-    private static final String THIRTY = "Thirty";
-    private static final String FORTY = "Forty";
-    private static final String ALL = "All";
-    private static final String SPACE = " ";
-    private static final String DEUCE = "Deuce";
-    private static final String PLAYER_ONE = "PlayerOne";
-    private static final String PLAYER_TWO = "PlayerTwo";
-    private static final String ADVANTAGE = "Advantage";
-    private static final String WINS = "Wins";
 
     public String getScore(int playerOneScore, int playerTwoScore) {
         if (isScoreEqual(playerOneScore, playerTwoScore))
